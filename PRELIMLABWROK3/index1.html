@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prelim Grade Calculator</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+    body {
+        font-family: 'Roboto', sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 30px;
+        margin: 0;
+        min-height: 100vh;
+    }
+    .calculator {
+        background: #ffffff;
+        border-radius: 16px;
+        padding: 30px;
+        box-shadow: 0 20px 60px rgba(118, 75, 162, 0.3);
+        width: 100%;
+        max-width: 500px;
+    }
+    h2 {
+        text-align: center;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 25px;
+        font-size: 28px;
+        font-weight: 600;
+    }
+    label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 500;
+        color: #4a5568;
+        font-size: 14px;
+    }
+    input[type="number"] {
+        width: 100%;
+        padding: 12px;
+        border-radius: 8px;
+        border: 2px solid #e2e8f0;
+        margin-bottom: 18px;
+        font-size: 14px;
+        transition: all 0.3s;
+        box-sizing: border-box;
+    }
+    input[type="number"]:focus {
+        outline: none;
+        border-color: #764ba2;
+        box-shadow: 0 0 0 3px rgba(118, 75, 162, 0.1);
+    }
+    button {
+        width: 100%;
+        padding: 14px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: all 0.3s;
+        font-weight: 600;
+        box-shadow: 0 4px 15px rgba(118, 75, 162, 0.3);
+    }
+    button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(118, 75, 162, 0.4);
+    }
+    button:active {
+        transform: translateY(0);
+    }
+    .results {
+        margin-top: 25px;
+        padding: 25px;
+        background: linear-gradient(135deg, #f3e7ff 0%, #e9d5ff 100%);
+        border-radius: 12px;
+        display: none;
+        border: 2px solid #c084fc;
+    }
+    .results h3 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #6b21a8;
+        font-size: 22px;
+        font-weight: 600;
+    }
+    .section-title {
+        color: #7c3aed;
+        font-weight: 600;
+        font-size: 16px;
+        margin: 15px 0 10px 0;
+        border-bottom: 2px solid #c084fc;
+        padding-bottom: 5px;
+    }
+    .result-item {
+        margin: 8px 0;
+        color: #5b21b6;
+        font-size: 14px;
+        padding: 10px;
+        background: rgba(255, 255, 255, 0.6);
+        border-radius: 6px;
+        display: flex;
+        justify-content: space-between;
+    }
+    .result-item strong {
+        color: #6b21a8;
+    }
+    .grade-highlight {
+        background: linear-gradient(135deg, #a78bfa 0%, #c084fc 100%);
+        color: white;
+        padding: 15px;
+        border-radius: 8px;
+        text-align: center;
+        font-size: 18px;
+        font-weight: 600;
+        margin: 15px 0;
+        box-shadow: 0 4px 10px rgba(167, 139, 250, 0.3);
+    }
+    .remarks {
+        background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+        border: 2px solid #f59e0b;
+        padding: 15px;
+        border-radius: 8px;
+        margin-top: 15px;
+        color: #92400e;
+    }
+    .remarks h4 {
+        margin: 0 0 10px 0;
+        color: #b45309;
+        font-size: 16px;
+    }
+    .remarks p {
+        margin: 8px 0;
+        font-size: 14px;
+        line-height: 1.5;
+    }
+    .impossible {
+        background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+        border-color: #dc2626;
+        color: #7f1d1d;
+    }
+    .impossible h4 {
+        color: #991b1b;
+    }
+    .excellent {
+        background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+        border-color: #059669;
+        color: #064e3b;
+    }
+    .excellent h4 {
+        color: #047857;
+    }
+</style>
+</head>
+<body>
+
+<div class="calculator">
+    <h2>Prelim Grade Calculator</h2>
+
+    <label for="attendance">Number of Attendances (0-100)</label>
+    <input type="number" id="attendance" placeholder="Enter attendance score" min="0" max="100">
+
+    <label for="lab1">Lab Work 1 Grade (0-100)</label>
+    <input type="number" id="lab1" placeholder="Enter Lab Work 1 grade" min="0" max="100">
+
+    <label for="lab2">Lab Work 2 Grade (0-100)</label>
+    <input type="number" id="lab2" placeholder="Enter Lab Work 2 grade" min="0" max="100">
+
+    <label for="lab3">Lab Work 3 Grade (0-100)</label>
+    <input type="number" id="lab3" placeholder="Enter Lab Work 3 grade" min="0" max="100">
+
+    <button onclick="calculateGrades()">Calculate Required Prelim Exam Score</button>
+
+    <div id="results" class="results"></div>
+</div>
+
+<!-- Link to external JavaScript file -->
+<script src="script1.js"></script>
+</body>
+</html>
